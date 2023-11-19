@@ -11,10 +11,11 @@ function App() {
         <div className="displayValue">
           <input type="text"/>
         </div>
-        <div>
-          <button>AC</button>
-          <button>DEL</button>
-          <button>/</button>
+        <div className="cal">
+          <button className="doubleSize">AC</button>
+          <button className="singleSize">DEL</button>
+          <button className="singleSize">/</button>
+          
         </div>
 
         <div>
@@ -39,11 +40,11 @@ function App() {
         </div>
 
         <div>
-        <button>.</button>
-        <button>0</button>
-        <button>=</button>
-        
+        <button className="singleSize">.</button>
+        <button className="singleSize">0</button>
+        <button className="doubleSize">=</button>
         </div>
+        
         </form>
 
         

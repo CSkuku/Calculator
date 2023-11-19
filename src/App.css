@@ -32,6 +32,8 @@ form button{
   color: white;
   font-weight: bold;
   cursor: pointer;
+  padding-inline: 0px;
+  padding-block: 0px;
 
 }
 
@@ -41,16 +43,41 @@ form button:hover{
 }
 
 
+.cal{
+
+display: flex;
+
+
+}
+.doubleSize{
+  flex: 2;
+}
+
+.singleSize{
+
+  flex: 1;
+}
+
+
+
+
+
+
+
 form .displayValue{
   display: flex;
-  justify-content: flex-end;
+ 
+  height: 40px;
+  
   margin: 5px 0px 15px 0px;
 
 }
-/* form .displayValue input{
+form .displayValue input{
 
+width:100%;
+border-radius: 5px;
 text-align: right;
- flex: 1;
+
   
 
-} */
+}
