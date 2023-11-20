@@ -1,15 +1,19 @@
 //import { useState } from 'react'
 
+import { useState } from 'react'
 import './App.css'
 
 function App() {
+
+  const[value, setValue] = useState("");
+  console.log(value);
   return (
     
     <div className="container">
       <div className="calculator">
         <form action="">
         <div className="displayValue">
-          <input type="text"/>
+          <input type="text" value={value} />
         </div>
         <div className="cal">
           <button className="doubleSize">AC</button>
@@ -19,7 +23,7 @@ function App() {
         </div>
 
         <div>
-        <button>7</button>
+        <button onClick={(e) => setValue(e.target.value)}>7</button>
         <button>8</button>
         <button>9</button>
         <button>*</button>
@@ -39,7 +43,7 @@ function App() {
         <button>+</button>
         </div>
 
-        <div>
+        <div className="cal">
         <button className="singleSize">.</button>
         <button className="singleSize">0</button>
         <button className="doubleSize">=</button>

@@ -47,37 +47,35 @@ form button:hover{
 
 display: flex;
 
-
 }
 .doubleSize{
+ 
   flex: 2;
 }
 
 .singleSize{
-
+  
   flex: 1;
+
 }
 
 
-
-
-
-
-
 form .displayValue{
+
   display: flex;
- 
-  height: 40px;
-  
+  height: 60px;
   margin: 5px 0px 15px 0px;
 
 }
 form .displayValue input{
 
-width:100%;
+/* width:100%; */
+width: 252px;
 border-radius: 5px;
 text-align: right;
-
+font-size: 30px;
+background-color: rgb(161, 173, 231);
+border:none;
   
 
 }
