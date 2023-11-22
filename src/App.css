@@ -19,7 +19,7 @@ background-color: white;
 
 }
 
-form button{
+.keypad button{
 
   border: none;
   outline: 0;
@@ -37,7 +37,7 @@ form button{
 
 }
 
-form button:hover{
+.keypad button:hover{
   
   background-color: rgb(92, 92, 169);
 }
@@ -60,14 +60,14 @@ display: flex;
 }
 
 
-form .displayValue{
+.keypad .displayValue{
 
   display: flex;
   height: 60px;
   margin: 5px 0px 15px 0px;
 
 }
-form .displayValue input{
+.keypad .displayValue input{
 
 /* width:100%; */
 width: 252px;

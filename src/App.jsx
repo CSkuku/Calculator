@@ -6,14 +6,24 @@ import './App.css'
 function App() {
 
   const[value, setValue] = useState("");
-  console.log(value);
+  var val = "hello";
+  
+  /* console.log(value); */
+
+  function handleInput(e){
+    console.log(e)
+    setValue(e)
+  }
+
+  console.log("New state set! Component rerendered. New state/value: ", value)
+  console.log("Regular variable is now...", val)
+
   return (
-    
     <div className="container">
       <div className="calculator">
-        <form action="">
+        <div className="keypad" >
         <div className="displayValue">
-          <input type="text" value={value} />
+          <input type="text" value={value} onChange={(e) => handleInput(e.target.value)}/>
         </div>
         <div className="cal">
           <button className="doubleSize">AC</button>
@@ -23,8 +33,11 @@ function App() {
         </div>
 
         <div>
-        <button onClick={(e) => setValue(e.target.value)}>7</button>
-        <button>8</button>
+        <button onClick={(e) => {
+          handleInput(e.target.value)
+          console.log("inline ", e.target.value)
+        }}>7</button>
+        <button onClick={(e)=>{val = e.target.value}}>8</button>
         <button>9</button>
         <button>*</button>
         </div>
@@ -49,7 +62,7 @@ function App() {
         <button className="doubleSize">=</button>
         </div>
         
-        </form>
+        </div>
 
         
       </div>
