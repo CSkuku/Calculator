@@ -6,7 +6,7 @@ const operators = ["*", "/", "+", "-"]
  
 function isValid(char){
   if(!numbers.includes(char) && !operators.includes(char)){
-    console.warn("Stoπ that. There are no letters in mathematics!")
+    console.warn("Stop that. There are no letters in mathematics!")
     return false
   }
   return true
@@ -102,7 +102,7 @@ function App() {
         <div className="cal">
           <button className="doubleSize" onClick={() => setValue([])}>AC</button>
           <button className="singleSize" onClick={() => del()}>DEL</button>
-          <button className="singleSize">/</button>
+          <button className="singleSize" value="/" onClick={(e) => {handleInput(e.target.value)}}>/</button>
         </div>
  
         <div>
@@ -123,11 +123,11 @@ function App() {
         <button value="1" onClick={(e) => {handleInput(e.target.value)}}>1</button>
         <button value="2" onClick={(e) => {handleInput(e.target.value)}}>2</button>
         <button value="3" onClick={(e) => {handleInput(e.target.value)}}>3</button>
-        <button >+</button>
+        <button value="+" onClick={(e) => {handleInput(e.target.value)}}>+</button>
         </div>
  
         <div className="cal">
-        <button className="singleSize">.</button>
+        <button className="singleSize" value="." onClick={(e) => {handleInput(e.target.value)}}>.</button>
         <button className="singleSize" value="0" onClick={(e) => {handleInput(e.target.value)}}>0</button>
         <button className="doubleSize" onClick={()=>formatNumbers()}>=</button>
         </div>
