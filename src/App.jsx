@@ -1,21 +1,6 @@
 import { useState } from "react";
 import "./App.css";
 
-/* const numbers = [
-  "0",
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  ",",
-  ".",
-  "",
-]; */
 const operators = ["*", "/", "+", "-"];
 
 function App() {
@@ -34,18 +19,54 @@ function App() {
       console.log(lastChar);
       console.log(currentValue);
 
-      if (operators.includes(lastChar) && operators.includes(input)) {
-        console.log("One operator at a time, please.");
-        return currentValue;
+      if (operators.includes(input)) {
+        for (const character of currentValue) {
+          if (operators.includes(character)) {
+            const arry1 = currentValue.split(character);
+            const result = calculate(arry1[0], character, arry1[1]);
+
+            return result + input;
+          }
+        }
       }
       console.log(currentValue + input);
       return currentValue + input;
     });
   }
 
+  //
   function del() {
     const newVal = value.slice(0, value.length - 1);
     setValue(newVal);
+  }
+
+  const calculate = (n1, operator, n2) => {
+    let result = "";
+
+    if (operator === "+") {
+      result = parseFloat(n1) + parseFloat(n2);
+    } else if (operator === "-") {
+      result = parseFloat(n1) - parseFloat(n2);
+    } else if (operator === "*") {
+      result = parseFloat(n1) * parseFloat(n2);
+    } else if (operator === "/") {
+      result = parseFloat(n1) / parseFloat(n2);
+    }
+
+    return result;
+  };
+
+  function equals() {
+    setValue((x) => {
+      for (const character of x) {
+        if (operators.includes(character)) {
+          const arry1 = x.split(character);
+          const result = String(calculate(arry1[0], character, arry1[1]));
+
+          return result;
+        }
+      }
+    });
   }
 
   return (
@@ -180,7 +201,15 @@ function App() {
           </div>
 
           <div className="cal">
-            <button className="singleSize">.</button>
+            <button
+              className="singleSize"
+              value="."
+              onClick={(e) => {
+                handleInput(e.target.value);
+              }}
+            >
+              .
+            </button>
             <button
               className="singleSize"
               value="0"
@@ -190,7 +219,7 @@ function App() {
             >
               0
             </button>
-            <button className="doubleSize" onClick={() => calculate()}>
+            <button className="doubleSize" onClick={equals}>
               =
             </button>
           </div>
