@@ -37,7 +37,7 @@ background-color: white;
 
 }
 
-.keypad button:hover{
+.keypad button:hover:not(:disabled){
   
   background-color: rgb(92, 169, 158);
 }
@@ -78,4 +78,10 @@ background-color: rgb(161, 214, 231);
 border:none;
   
 
+}
+
+
+button:disabled{
+
+  opacity: 0.5;
 }

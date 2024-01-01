@@ -6,30 +6,48 @@ const operators = ["*", "/", "+", "-"];
 function App() {
   const [value, setValue] = useState("");
 
-  /* function handleInput(input) {
-    const v = value + input;
-    setValue(v);
-  } */
+  const lastChar = value.slice(-1);
+  const isLastCharAnOperator = operators.includes(lastChar);
+  const opeartorDisabled = isLastCharAnOperator || value === "";
 
   function handleInput(input) {
-    console.log(input);
-
     setValue((currentValue) => {
       const lastChar = currentValue.slice(-1);
-      console.log(lastChar);
-      console.log(currentValue);
+
+      if (operators.includes(lastChar) && operators.includes(input)) {
+        return currentValue;
+      }
+
+      if (input === "." && currentValue === "") {
+        return "0.";
+      }
+
+      if (input === "." && currentValue.includes(".")) {
+        return currentValue;
+      }
 
       if (operators.includes(input)) {
+        if (lastChar === ".") {
+          return currentValue;
+        }
         for (const character of currentValue) {
           if (operators.includes(character)) {
-            const arry1 = currentValue.split(character);
-            const result = calculate(arry1[0], character, arry1[1]);
+            const [leftHandSide, rightHandSide] = currentValue.split(character);
+            const result = calculate(leftHandSide, character, rightHandSide);
+            if (isNaN(result)) {
+              console.error("Failed to calcualte result", {
+                leftHandSide,
+                operator: character,
+                rightHandSide,
+              });
+              return currentValue;
+            }
 
             return result + input;
           }
         }
       }
-      console.log(currentValue + input);
+
       return currentValue + input;
     });
   }
@@ -60,12 +78,27 @@ function App() {
     setValue((x) => {
       for (const character of x) {
         if (operators.includes(character)) {
-          const arry1 = x.split(character);
-          const result = String(calculate(arry1[0], character, arry1[1]));
+          const [leftHandSide, rightHandSide] = x.split(character);
+          if (!leftHandSide || !rightHandSide) {
+            return x;
+          }
 
+          const result = String(
+            calculate(leftHandSide, character, rightHandSide)
+          );
+
+          if (isNaN(result)) {
+            console.error("Failed to calcualte result", {
+              leftHandSide,
+              operator: character,
+              rightHandSide,
+            });
+            return x;
+          }
           return result;
         }
       }
+      return x;
     });
   }
 
@@ -77,10 +110,18 @@ function App() {
             <input type="text" value={value} />
           </div>
           <div className="cal">
-            <button className="doubleSize" onClick={() => setValue("")}>
+            <button
+              className="doubleSize"
+              onClick={() => setValue("")}
+              disabled={value === ""}
+            >
               AC
             </button>
-            <button className="singleSize" onClick={() => del()}>
+            <button
+              className="singleSize"
+              onClick={() => del()}
+              disabled={value === ""}
+            >
               DEL
             </button>
             <button
@@ -90,6 +131,7 @@ function App() {
                 console.log(e);
                 handleInput(e.target.value);
               }}
+              disabled={opeartorDisabled}
             >
               /
             </button>
@@ -125,6 +167,7 @@ function App() {
               onClick={(e) => {
                 handleInput(e.target.value);
               }}
+              disabled={opeartorDisabled}
             >
               *
             </button>
@@ -160,6 +203,7 @@ function App() {
               onClick={(e) => {
                 handleInput(e.target.value);
               }}
+              disabled={opeartorDisabled}
             >
               -
             </button>
@@ -195,6 +239,7 @@ function App() {
               onClick={(e) => {
                 handleInput(e.target.value);
               }}
+              disabled={opeartorDisabled}
             >
               +
             </button>
@@ -219,7 +264,11 @@ function App() {
             >
               0
             </button>
-            <button className="doubleSize" onClick={equals}>
+            <button
+              className="doubleSize"
+              onClick={equals}
+              disabled={opeartorDisabled}
+            >
               =
             </button>
           </div>
